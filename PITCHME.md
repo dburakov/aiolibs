@@ -1,4 +1,4 @@
-## Booster for aiohttp
+# Booster for aiohttp
 
 <br><br>
 <div style="text-align: right">Dmitry Burakov</div>
@@ -17,6 +17,17 @@
 +++
 
 ![Microcervices](assets/microservices-microservices-everywhere.jpg)
+
++++
+
+| Operation          | Time      | Scaled time |
+|--------------------|-----------|-------------|
+| 1 CPU cycle        | 0.3 ns    | 1 s         |
+| RAM I/O            | 120 ns    | 6 min       |
+| SSD I/O            | 50-150 μs | 2-6 days    |
+| HDD I/O            | 1-10 ms   | 1-12 months |
+| Network: inside DC | 3 ms      | 3 months    |
+| Internet: US to EU | 81 ms     | 8 years     |
 
 ---
 
