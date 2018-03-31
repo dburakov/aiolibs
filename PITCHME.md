@@ -1,7 +1,9 @@
 ## Optimize your most expensive resource
 ### Booster for aiohttp
 
-Dmitry Burakov
+
+
+<div style="text-align: right">Dmitry Burakov</div>
 
 ---
 
