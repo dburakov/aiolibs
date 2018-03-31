@@ -1,18 +1,19 @@
 ## Optimize your most expensive resource
-## Booster for aiohttp
+### Booster for aiohttp
+
+Dmitry Burakov
+
 ---
 
 ## The most expensive resource
 
 #### What is it?
 
----
++++
 
 ## Its' YOU!
 
----
-
-## Microcervices
++++
 
 ![Microcervices](assets/microservices-microservices-everywhere.jpg)
 
