@@ -31,6 +31,13 @@
 
 ---
 
+Types of services:
+
+- Worker
+- HTTP API
+
+---
+
 #### The main
 
 [Press Down Key]
@@ -61,4 +68,14 @@ else:
 
 ###### Use code-presenting to **step-thru** code <p> from directly within your presentation 
 
+---
+
+Presentation: https://gitpitch.com/dburakov/aiolibs
+
+Libs: https://github.com/wgnet?q=aio
+
+Links:
+
+- https://blog.codinghorror.com/the-infinite-space-between-words/
+- https://hackernoon.com/yes-python-is-slow-and-i-dont-care-13763980b5a1
 
