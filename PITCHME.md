@@ -44,6 +44,10 @@
 
 ---
 
+### aioamqp-ext
+
++++
+
 ### Producer
 
 ```python
