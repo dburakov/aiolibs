@@ -114,6 +114,10 @@ It can monitor:
 
 +++
 
+![monitoring](assets/monitoring.png)
+
++++
+
 ### Configuring
 
 ```
@@ -174,7 +178,7 @@ MONITORING = {
 ```
 
 @[2-3]
-@[6-15]
+@[6-16]
 @[17-26]
 @[27-39]
 @[40-52]
@@ -223,8 +227,9 @@ monitoring_postgres 1.0
 
 +++
 
+### grafana
 
-![Microcervices](assets/aiohttp_prometheus_monitoring_graphs.png)
+![graphs](assets/aiohttp_prometheus_monitoring_graphs.png)
 
 ---
 
