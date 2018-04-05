@@ -118,7 +118,7 @@ It can monitor:
 
 +++
 
-![monitoring](assets/monitoring.png)
+![monitoring](assets/monitoring-types.png)
 
 +++
 
