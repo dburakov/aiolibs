@@ -108,14 +108,6 @@ if __name__ == "__main__":
 
 ### aiohttp_prometheus_monitoring
 
-It can monitor:
-
-- external host HTTP status
-- postgres database status
-- redis availability
-- rabbit AMQP availability
-- whatever else, as can be extended easily
-
 +++
 
 ![monitoring](assets/monitoring_types.png)
