@@ -102,6 +102,132 @@ if __name__ == "__main__":
 
 ---
 
+### aiohttp_prometheus_monitoring
+
+It can monitor:
+
+- external host HTTP status
+- postgres database status
+- redis availability
+- rabbit AMQP availability
+- whatever else, as can be extended easily
+
++++
+
+### Configuring
+
+```
+MONITORING = {
+    'route_ping': '/ping',
+    'route_metrics': '/metrics',
+
+    'metrics': [
+        {
+            'name': 'monitoring_http',
+            'description': 'Check HTTP status',
+            'module': 'aiohttp_prometheus_monitoring.metrics.http.HttpMetric',
+            'sleep_time': 300,
+            'params': {
+                'url': 'http://localhost/my_ping/',
+                'timeout': 1,
+                'verify_ssl': True,
+            }
+        },
+        {
+            'name': 'monitoring_redis',
+            'description': 'Check redis connection',
+            'module': 'aiohttp_prometheus_monitoring.metrics.redis.RedisMetric',
+            'sleep_time': 60,
+            'params': {
+                'host': 'localhost',
+                'port': '6379',
+            }
+        },
+        {
+            'name': 'monitoring_mq',
+            'description': 'Check MQ connection',
+            'module': 'aiohttp_prometheus_monitoring.metrics.amqp.AmqpMetric',
+            'sleep_time': 60,
+            'params': {
+                'host': 'localhost',
+                'port': '5672',
+                'user': 'root',
+                'password': '123',
+                'vhost': 'myvhost',
+            }
+        },
+        {
+            'name': 'monitoring_postgres',
+            'description': 'Check postgres connection',
+            'module': 'aiohttp_prometheus_monitoring.metrics.postgres.PostgresMetric',
+            'sleep_time': 60,
+            'params': {
+                'database': 'core',
+                'user': 'core',
+                'password': 'core',
+                'host': 'localhost',
+                'port': 5433,
+            }
+        },
+    ]
+}
+```
+
+@[2-3]
+@[6-15]
+@[17-26]
+@[27-39]
+@[40-52]
+
++++
+
+### Install
+
+```
+pip install aiohttp_prometheus_monitoring[amqp,redis,postgres]
+```
+
++++
+
+### Setup
+
+```python
+from aiohttp import web
+from aiohttp_prometheus_monitoring import setup_monitoring
+
+def create_app(loop=None):    
+    app = web.Application()
+    loop.run_until_complete(setup_monitoring(settings.MONITORING, app))
+    
+    return app
+```
+
++++
+
+### /metrics
+
+```
+# HELP monitoring_http Check HTTP status
+# TYPE monitoring_http gauge
+monitoring_http 1.0
+# HELP monitoring_redis Check redis connection
+# TYPE monitoring_redis gauge
+monitoring_redis 1.0
+# HELP monitoring_mq Check MQ connection
+# TYPE monitoring_mq gauge
+monitoring_mq 1.0
+# HELP monitoring_postgres Check postgres connection
+# TYPE monitoring_postgres gauge
+monitoring_postgres 1.0
+```
+
++++
+
+
+![Microcervices](assets/aiohttp_prometheus_monitoring_graphs.png)
+
+---
+
 Presentation: https://gitpitch.com/dburakov/aiolibs
 
 Libs: https://github.com/wgnet?q=aio
