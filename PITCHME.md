@@ -31,42 +31,74 @@
 
 ---
 
-Types of services:
+### Types of services:
 
-- Worker
 - HTTP API
+- Worker
 
 ---
 
-#### The main
+### A new service TODO:
 
-[Press Down Key]
+- 
 
-+++
+---
+
+### Producer
 
 ```python
-from time import localtime
+from aioamqp_ext import BaseProducer
 
-activities = {8: 'Sleeping', 9: 'Commuting', 17: 'Working',
-              18: 'Commuting', 20: 'Eating', 22: 'Resting' }
+producer = BaseProducer(**{
+    'url': 'amqp://localhost:5672/',
+    'exchange': 'my_exchange'
+})
 
-time_now = localtime()
-hour = time_now.tm_hour
+producer.publish_message(
+    payload='foo',
+    routing_key='bar'
+)
 
-for activity_time in sorted(activities.keys()):
-    if hour < activity_time:
-        print activities[activity_time]
-        break
-else:
-    print 'Unknown, AFK or sleeping!'
+producer.close()
 ```
 
 @[1]
-@[3-4]
-@[6-7]
-@[9-14]
+@[3-6]
+@[8-11]
+@[13]
 
-###### Use code-presenting to **step-thru** code <p> from directly within your presentation 
++++
+
+### Consumer
+
+```python
+from aioamqp_ext import BaseConsumer
+
+class Consumer(BaseConsumer):
+    async def process_request(self, data):
+        print(data)
+
+if __name__ == "__main__":
+    consumer = Consumer(**{
+        'url': 'amqp://localhost:5672/',
+        'exchange': 'my_exchange',
+        'queue': 'my_queue',
+        'routing_key': 'foo.bar'
+    })
+    try:
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(consumer.consume())
+        loop.run_forever()
+    except KeyboardInterrupt:
+        loop.run_until_complete(consumer.close())
+    finally:
+        loop.close()
+```
+
+@[1]
+@[3-5]
+@[8-13]
+@[14-21]
 
 ---
 
