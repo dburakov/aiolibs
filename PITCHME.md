@@ -104,18 +104,17 @@ if __name__ == "__main__":
 
 ```python
 from sqlalchemy import MetaData, Integer, String, DateTime
-from aiopg.sa import create_engine
 from aiosqlalchemy_miniorm import RowModel, RowModelDeclarativeMeta, BaseModelManager
 
-metadata = MetaData()
-BaseModel = declarative_base(metadata=metadata, cls=RowModel, metaclass=RowModelDeclarativeMeta)    
-
-async def setup():
-    metadata.bind = await create_engine(**database_settings)
+BaseModel = declarative_base(
+    metadata=metadata, 
+    cls=RowModel, 
+    metaclass=RowModelDeclarativeMeta
+) 
 
 class MyEntityManager(BaseModelManager):
     async def get_with_products(self):
-        return await self.get_items(where_list=[(MyEntity.c.num_products > 0)])
+        return await self.get_items([(MyEntity.c.num_products > 0)])
     
 class MyEntity(BaseModel):
     __tablename__ = 'my_entity'
@@ -127,21 +126,21 @@ class MyEntity(BaseModel):
     created_at = Column(DateTime(), server_default=text('now()'), nullable=False)
 ```
 
-@[1-9]
-@[11-13]
-@[15-22]
+@[1-8]
+@[10-12]
+@[14-21]
 
 +++
 
 ```python
 objects = await MyEntity.objects.get_instances(
-    where_list=[(MyEntity.c.name == 'foo')],
+    [(MyEntity.c.name == 'foo')],
     order_by=['name', '-num_products']
 )
 
-num_objects = await MyEntity.objects.count(
-    where_list=[(MyEntity.c.name == 'foo'), (MyEntity.c.num_products > 3)]
-)
+num_objects = await MyEntity.objects.count([
+    (MyEntity.c.name == 'foo'), (MyEntity.c.num_products > 3)
+])
 ```
     
 @[1-4]
