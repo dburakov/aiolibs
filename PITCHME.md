@@ -102,6 +102,10 @@ if __name__ == "__main__":
 
 ### aiosqlalchemy_miniorm
 
++++
+
+### Init
+
 ```python
 from sqlalchemy import MetaData, Integer, String, DateTime
 from aiosqlalchemy_miniorm import RowModel, RowModelDeclarativeMeta, BaseModelManager
@@ -133,6 +137,8 @@ class MyEntity(BaseModel):
 
 +++
 
+### Query
+
 ```python
 objects = await MyEntity.objects.get_instances(
     [(MyEntity.c.name == 'foo')],
@@ -149,6 +155,8 @@ num_objects = await MyEntity.objects.count([
 
 +++
 
+### Management
+
 ```python
 record = await MyEntity.objects.insert(
     name='bar',
@@ -161,10 +169,66 @@ await record.delete()
 
 +++
 
+### Transactions
+
 ```python
 async with MyEntity.objects.transaction() as my_entity_objects:
     await my_entity_objects.insert(name='bar', num_products=0)
     await my_entity_objects.delete([(MyEntity.c.name == 'foo')])
+```
+
+---
+
+### aiohttp_baseapi
+
++++
+
+```
+$ pip install aiohttp_baseapi
+```
+
++++
+
+```
+$ baseapi-start-project
+```
+
++++
+
+```
+$ cd src/
+$ pip install -r .meta/packages
+```
+
++++
+
+```
+$ echo "DATABASE = {'host':'localhost','port':5432,'database':'test','user':'test','password':'test','minsize':1,'maxsize':10}" > ./settings_local.py
+```
+
++++
+
+```
+$ alembic revision --autogenerate -m "init"
+$ alembic upgrade head
+```
+
++++
+
+```
+python ./main.py --port=9000
+```
+
++++
+
+```
+http GET :9000
+http POST :9000/authors <<< '{"data":{"name":"John", "surname": "Smith"}}'
+http POST :9000/books <<< '{"data":{"category": "Fiction","name":"Birthday","is_available":true, "author_id": 1}}'
+http GET ":9000/books?filter[name]=Birthday&include=authors"
+http GET :9000/books/1
+http PUT :9000/books/1 <<< '{"data":{"is_available":false}}'
+http DELETE :9000/books/1
 ```
 
 ---
