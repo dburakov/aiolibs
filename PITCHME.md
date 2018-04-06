@@ -231,6 +231,70 @@ http PUT :9000/books/1 <<< '{"data":{"is_available":false}}'
 http DELETE :9000/books/1
 ```
 
++++
+
+```
+├── logs
+└── src
+    ├── alembic.ini
+    ├── apps
+    │   ├── default
+    │   │   ├── __init__.py
+    │   │   ├── routes.py
+    │   │   └── views.py
+    │   ├── demo
+    │   │   ├── data_providers.py
+    │   │   ├── __init__.py
+    │   │   ├── models.py
+    │   │   ├── routes.py
+    │   │   └── views.py
+    │   └── __init__.py
+    ├── conf
+    │   ├── defaults.py
+    │   ├── __init__.py
+    │   └── settings.py
+    ├── core
+    │   ├── app.py
+    │   ├── database.py
+    │   ├── dispatcher.py
+    │   ├── __init__.py
+    │   ├── log.py
+    │   ├── middlewares.py
+    │   ├── routes.py
+    │   └── views.py
+    ├── __init__.py
+    ├── main.py
+    └── migrations
+        ├── env.py
+        ├── script.py.mako
+        └── versions
+
+```
+
++++
+
+```python
+class Author(BaseModel):
+    __tablename__ = 'authors'
+
+    id = sa.Column(sa.Integer, primary_key=True)
+    name = sa.Column(sa.String)
+    surname = sa.Column(sa.String)
+
+
+class Book(BaseModel):
+    __tablename__ = 'books'
+    __table_args__ = (
+        sa.UniqueConstraint('category', 'name', name='unique_book_name_in_category'),
+    )
+
+    id = sa.Column(sa.Integer, primary_key=True)
+    category = sa.Column(sa.String(100), nullable=False, index=True)
+    name = sa.Column(sa.String(255), nullable=True)
+    is_available = sa.Column(sa.Boolean)
+    author_id = sa.Column(sa.Integer, sa.ForeignKey(Author.id, onupdate='CASCADE', ondelete='CASCADE'), index=True)
+```
+
 ---
 
 ### aiohttp_prometheus_monitoring
