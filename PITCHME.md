@@ -126,7 +126,8 @@ class MyEntity(BaseModel):
     created_at = Column(DateTime(), server_default=text('now()'), nullable=False)
 ```
 
-@[1-8]
+@[1-2]
+@[4-8]
 @[10-12]
 @[14-21]
 
