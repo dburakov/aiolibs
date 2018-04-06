@@ -33,14 +33,8 @@
 
 ### Types of services:
 
-- HTTP API
 - Worker
-
----
-
-### A new service TODO:
-
-- 
+- HTTP API
 
 ---
 
@@ -103,6 +97,75 @@ if __name__ == "__main__":
 @[3-5]
 @[8-13]
 @[14-21]
+
+---
+
+### aiosqlalchemy_miniorm
+
+```python
+from sqlalchemy import MetaData, Integer, String, DateTime
+from aiopg.sa import create_engine
+from aiosqlalchemy_miniorm import RowModel, RowModelDeclarativeMeta, BaseModelManager
+
+metadata = MetaData()
+BaseModel = declarative_base(metadata=metadata, cls=RowModel, metaclass=RowModelDeclarativeMeta)    
+
+async def setup():
+    metadata.bind = await create_engine(**database_settings)
+
+class MyEntityManager(BaseModelManager):
+    async def get_with_products(self):
+        return await self.get_items(where_list=[(MyEntity.c.num_products > 0)])
+    
+class MyEntity(BaseModel):
+    __tablename__ = 'my_entity'
+    __model_manager_class__ = MyEntityManager
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(100), nullable=False)
+    num_products = Column(Integer)
+    created_at = Column(DateTime(), server_default=text('now()'), nullable=False)
+```
+
+@[1-9]
+@[11-13]
+@[15-22]
+
++++
+
+```python
+objects = await MyEntity.objects.get_instances(
+    where_list=[(MyEntity.c.name == 'foo')],
+    order_by=['name', '-num_products']
+)
+
+num_objects = await MyEntity.objects.count(
+    where_list=[(MyEntity.c.name == 'foo'), (MyEntity.c.num_products > 3)]
+)
+```
+    
+@[1-4]
+@[6-8]
+
++++
+
+```python
+record = await MyEntity.objects.insert(
+    name='bar',
+    num_products=0,
+)
+
+await record.update(name='baz')
+await record.delete()
+```
+
++++
+
+```python
+async with MyEntity.objects.transaction() as my_entity_objects:
+    await my_entity_objects.insert(name='bar', num_products=0)
+    await my_entity_objects.delete([(MyEntity.c.name == 'foo')])
+```
 
 ---
 
