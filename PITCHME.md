@@ -213,7 +213,7 @@ $ pip install -r .meta/packages
 +++
 
 ```
-$ echo "DATABASE = {'host':'localhost','port':5432,'database':'test','user':'test','password':'test','minsize':1,'maxsize':10}" > ./settings_local.py
+$ echo "DATABASE = {'host':'localhost',..}" > ./settings_local.py
 ```
 
 +++
