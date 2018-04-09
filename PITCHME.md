@@ -311,6 +311,9 @@ class Book(BaseModel):
     author_id = sa.Column(sa.Integer, sa.ForeignKey(Author.id, onupdate='CASCADE', ondelete='CASCADE'), index=True)
 ```
 
+@[1-6]
+@[9-19]
+
 ---
 
 ### aiohttp_prometheus_monitoring
