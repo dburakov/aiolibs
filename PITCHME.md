@@ -182,9 +182,9 @@ await record.delete()
 ### Transactions
 
 ```python
-async with MyEntity.objects.transaction() as my_entity_objects:
-    await my_entity_objects.insert(name='bar', num_products=0)
-    await my_entity_objects.delete([(MyEntity.c.name == 'foo')])
+async with MyEntity.objects.transaction() as objects:
+    await objects.insert(name='bar', num_products=0)
+    await objects.delete([(MyEntity.c.name == 'foo')])
 ```
 
 ---
