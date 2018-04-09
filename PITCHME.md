@@ -122,7 +122,9 @@ BaseModel = declarative_base(
 
 class MyEntityManager(BaseModelManager):
     async def get_with_products(self):
-        return await self.get_items([(MyEntity.c.num_products > 0)])
+        return await self.get_items(
+            [(MyEntity.c.num_products > 0)]
+        )
     
 class MyEntity(BaseModel):
     __tablename__ = 'my_entity'
@@ -131,13 +133,17 @@ class MyEntity(BaseModel):
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False)
     num_products = Column(Integer)
-    created_at = Column(DateTime(), server_default=text('now()'), nullable=False)
+    created_at = Column(
+        DateTime(), 
+        server_default=text('now()'), 
+        nullable=False
+    )
 ```
 
 @[1-2]
 @[4-8]
-@[10-12]
-@[14-21]
+@[10-14]
+@[16-27]
 
 +++
 
