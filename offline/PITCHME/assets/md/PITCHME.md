@@ -16,7 +16,7 @@
 
 +++
 
-![Microcervices](assets/microservices-microservices-everywhere.jpg)
+![Image](./assets/md/assets/microservices-microservices-everywhere.jpg)
 
 +++
 
@@ -29,15 +29,18 @@
 | Network: inside DC | 3 ms      | 3 months    |
 | Internet: US to EU | 81 ms     | 8 years     |
 
-+++
+---
 
 ### Types of services:
 
+- Worker
 - HTTP API
-- Background Worker
+
++++
+
+TBD
 
 ---
-
 
 ### aioamqp-ext
 
@@ -61,10 +64,10 @@ producer.publish_message(
 producer.close()
 ```
 
-@[1]
-@[3-6]
-@[8-11]
-@[13]
+<span class="code-presenting-annotation fragment current-only" data-code-focus="1"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="3-6"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="8-11"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="13"></span>
 
 +++
 
@@ -94,10 +97,10 @@ if __name__ == "__main__":
         loop.close()
 ```
 
-@[1]
-@[3-5]
-@[8-13]
-@[14-21]
+<span class="code-presenting-annotation fragment current-only" data-code-focus="1"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="3-5"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="8-13"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="14-21"></span>
 
 ---
 
@@ -137,10 +140,10 @@ class MyEntity(BaseModel):
     )
 ```
 
-@[1-2]
-@[4-8]
-@[10-14]
-@[16-27]
+<span class="code-presenting-annotation fragment current-only" data-code-focus="1-2"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="4-8"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="10-14"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="16-27"></span>
 
 +++
 
@@ -157,8 +160,8 @@ num_objects = await MyEntity.objects.count([
 ])
 ```
     
-@[1-4]
-@[6-8]
+<span class="code-presenting-annotation fragment current-only" data-code-focus="1-4"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="6-8"></span>
 
 +++
 
@@ -278,11 +281,11 @@ http DELETE :9000/books/1
 
 ```
 
-@[4-15]
-@[16-19]
-@[20-28]
-@[20-28]
-@[31-34]
+<span class="code-presenting-annotation fragment current-only" data-code-focus="4-15"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="16-19"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="20-28"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="20-28"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="31-34"></span>
 
 +++
 
@@ -308,8 +311,8 @@ class Book(BaseModel):
     author_id = sa.Column(sa.Integer, sa.ForeignKey(Author.id, onupdate='CASCADE', ondelete='CASCADE'), index=True)
 ```
 
-@[1-6]
-@[9-19]
+<span class="code-presenting-annotation fragment current-only" data-code-focus="1-6"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="9-19"></span>
 
 ---
 
@@ -317,7 +320,7 @@ class Book(BaseModel):
 
 +++
 
-![monitoring](assets/monitoring_types.png)
+![Image](./assets/md/assets/monitoring_types.png)
 
 +++
 
@@ -380,11 +383,11 @@ MONITORING = {
 }
 ```
 
-@[2-3]
-@[6-16]
-@[17-26]
-@[27-39]
-@[40-52]
+<span class="code-presenting-annotation fragment current-only" data-code-focus="2-3"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="6-16"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="17-26"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="27-39"></span>
+<span class="code-presenting-annotation fragment current-only" data-code-focus="40-52"></span>
 
 +++
 
@@ -432,7 +435,7 @@ monitoring_postgres 1.0
 
 ### grafana
 
-![graphs](assets/aiohttp_prometheus_monitoring_graphs.png)
+![Image](./assets/md/assets/aiohttp_prometheus_monitoring_graphs.png)
 
 ---
 
@@ -444,4 +447,3 @@ Links:
 
 - https://blog.codinghorror.com/the-infinite-space-between-words/
 - https://hackernoon.com/yes-python-is-slow-and-i-dont-care-13763980b5a1
-
