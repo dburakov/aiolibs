@@ -36,6 +36,10 @@
 - HTTP API
 - Background Worker
 
++++
+
+[picture with 4 libs here]
+
 ---
 
 
@@ -305,11 +309,14 @@ class Book(BaseModel):
     category = sa.Column(sa.String(100), nullable=False, index=True)
     name = sa.Column(sa.String(255), nullable=True)
     is_available = sa.Column(sa.Boolean)
-    author_id = sa.Column(sa.Integer, sa.ForeignKey(Author.id, onupdate='CASCADE', ondelete='CASCADE'), index=True)
+    author_id = sa.Column(
+        sa.Integer, 
+        sa.ForeignKey(Author.id, onupdate='CASCADE', ondelete='CASCADE'), index=True
+    )
 ```
 
 @[1-6]
-@[9-19]
+@[9-22]
 
 ---
 
@@ -433,6 +440,10 @@ monitoring_postgres 1.0
 ### grafana
 
 ![graphs](assets/aiohttp_prometheus_monitoring_graphs.png)
+
+---
+
+[pic about evolution]
 
 ---
 
