@@ -31,14 +31,19 @@
 
 +++
 
-### Types of services:
+### Types of services
 
 - HTTP API
 - Background Worker
 
 +++
 
-[picture with 4 libs here]
+### Toolkit overview
+
+- aioamqp-ext
+- aiosqlalchemy_miniorm
+- aiohttp_baseapi
+- aiohttp_prometheus_monitoring
 
 ---
 
@@ -443,7 +448,7 @@ monitoring_postgres 1.0
 
 ---
 
-[pic about evolution]
+![money](assets/time-is-money.jpg)
 
 ---
 
