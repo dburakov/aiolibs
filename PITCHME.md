@@ -198,39 +198,23 @@ async with MyEntity.objects.transaction() as objects:
 
 ```
 $ pip install aiohttp_baseapi
-```
-
-+++
-
-```
 $ baseapi-start-project
-```
-
-+++
-
-```
 $ cd src/
 $ pip install -r .meta/packages
-```
-
-+++
-
-```
 $ echo "DATABASE = {'host':'localhost',..}" > ./settings_local.py
-```
-
-+++
-
-```
 $ alembic revision --autogenerate -m "init"
 $ alembic upgrade head
+$ python ./main.py --port=9000
 ```
 
-+++
-
-```
-python ./main.py --port=9000
-```
+@[1]
+@[2]
+@[3]
+@[4]
+@[5]
+@[6]
+@[7]
+@[8]
 
 +++
 
@@ -246,7 +230,7 @@ http POST :9000/books <<< \
 
 http GET ":9000/books?filter[name]=Birthday&include=authors"
 
-http GET :9000/books/1?fields=name,category
+http GET ":9000/books/1?fields=name,category"
 
 http PUT :9000/books/1 <<< '{"data":{"is_available":false}}'
 
