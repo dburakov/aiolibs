@@ -31,10 +31,7 @@
 
 +++
 
-### Types of services
-
-- HTTP API
-- Background Worker
+![django](assets/python-plus-django-1.png)
 
 +++
 
