@@ -236,13 +236,30 @@ python ./main.py --port=9000
 
 ```
 http GET :9000
-http POST :9000/authors <<< '{"data":{"name":"John", "surname": "Smith"}}'
-http POST :9000/books <<< '{"data":{"category": "Fiction","name":"Birthday","is_available":true, "author_id": 1}}'
+
+http POST :9000/authors <<< \
+'{"data":{"name":"John", "surname": "Smith"}}'
+
+http POST :9000/books <<< \
+'{"data":{"category": "Fiction","name":"Birthday",\
+"is_available":true, "author_id": 1}}'
+
 http GET ":9000/books?filter[name]=Birthday&include=authors"
-http GET :9000/books/1
+
+http GET :9000/books/1?fields=name,category
+
 http PUT :9000/books/1 <<< '{"data":{"is_available":false}}'
+
 http DELETE :9000/books/1
 ```
+
+@[1]
+@[3-4]
+@[6-8]
+@[10]
+@[12]
+@[14]
+@[16]
 
 +++
 
@@ -293,28 +310,28 @@ http DELETE :9000/books/1
 +++
 
 ```python
-class Author(BaseModel):
-    __tablename__ = 'authors'
+class BaseBooksMeta(BaseMeta):
+    data_provider_class = BooksDataProvider
+    body_data_schema = dict(
+		BaseMeta.body_data_schema, 
+		properties={'data': model_schema(Book, excludes=['id'])}
+	)
+	
 
-    id = sa.Column(sa.Integer, primary_key=True)
-    name = sa.Column(sa.String)
-    surname = sa.Column(sa.String)
-
-
-class Book(BaseModel):
-    __tablename__ = 'books'
-    __table_args__ = (
-        sa.UniqueConstraint('category', 'name', name='unique_book_name_in_category'),
-    )
-
-    id = sa.Column(sa.Integer, primary_key=True)
-    category = sa.Column(sa.String(100), nullable=False, index=True)
-    name = sa.Column(sa.String(255), nullable=True)
-    is_available = sa.Column(sa.Boolean)
-    author_id = sa.Column(
-        sa.Integer, 
-        sa.ForeignKey(Author.id, onupdate='CASCADE', ondelete='CASCADE'), index=True
-    )
+class BooksListView(BaseListView):
+    class Meta(BaseBooksMeta):
+        available_filters = ['id', 'category', 'name', 'is_available']
+        available_fields = ['category', 'name', 'is_available']
+        available_includes = {
+            'authors': {
+                'view_class': AuthorsListView,
+                'relations': [{
+                    'included_entity_field_name': Author.id.name,
+                    'root_entity_field_name': Book.author_id.name,
+                }],
+            }
+        }
+        available_sort_fields = ['category', 'name', 'is_available']
 ```
 
 @[1-6]
