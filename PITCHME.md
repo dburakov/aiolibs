@@ -303,19 +303,19 @@ class BaseBooksMeta(BaseMeta):
 	
 
 class BooksListView(BaseListView):
-    class Meta(BaseBooksMeta):
-        available_filters = ['id', 'category', 'name', 'is_available']
-        available_fields = ['category', 'name', 'is_available']
-        available_includes = {
-            'authors': {
-                'view_class': AuthorsListView,
-                'relations': [{
-                    'included_entity_field_name': Author.id.name,
-                    'root_entity_field_name': Book.author_id.name,
-                }],
-            }
-        }
-        available_sort_fields = ['category', 'name', 'is_available']
+  class Meta(BaseBooksMeta):
+    available_filters = ['id', 'category', 'name', 'is_available']
+    available_fields = ['category', 'name', 'is_available']
+    available_includes = {
+      'authors': {
+          'view_class': AuthorsListView,
+          'relations': [{
+              'included_entity_field_name': Author.id.name,
+              'root_entity_field_name': Book.author_id.name,
+          }],
+      }
+    }
+    available_sort_fields = ['category', 'name', 'is_available']
 ```
 
 @[1-6]
