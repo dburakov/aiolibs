@@ -446,7 +446,7 @@ monitoring_postgres 1.0
 
 ---
 
-![money](assets/time-is-money.jpg)
+![tools](assets/tools.jpg)
 
 ---
 
