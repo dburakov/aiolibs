@@ -111,6 +111,8 @@ if __name__ == "__main__":
 
 ### aiosqlalchemy_miniorm
 
+https://github.com/wgnet/aiosqlalchemy_miniorm
+
 +++
 
 ### Init
@@ -195,6 +197,8 @@ async with MyEntity.objects.transaction() as objects:
 ---
 
 ### aiohttp_baseapi
+
+https://github.com/wgnet/aiohttp_baseapi
 
 +++
 
@@ -326,6 +330,8 @@ class BooksListView(BaseListView):
 ---
 
 ### aiohttp_prometheus_monitoring
+
+https://github.com/wgnet/aiohttp_prometheus_monitoring
 
 +++
 
