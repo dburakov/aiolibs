@@ -1,13 +1,6 @@
 
+Run: 
 
-Links
-
-* https://gitpitch.com/dburakov/aiolibs
-* https://github.com/minskpython/minskpython.github.io/projects/1
-* https://github.com/inesusvet/tests-talk/blob/master/PITCHME.md
-
-
-## Тезисы
-
-Рассказ про инструменты, позволяющие создавать сложные асинхронные приложения очень быстро. 
-При этом иметь возможность делать сверхтонкую настройку и писать минимум кода. Бонус: мониторинг из коробки.
+* Web: https://gitpitch.com/dburakov/aiolibs
+* Python2: python -m SimpleHTTPServer 8000
+* Python3: python -m http.server 8000
