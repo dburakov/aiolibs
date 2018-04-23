@@ -47,6 +47,8 @@
 
 ### aioamqp-ext
 
+https://github.com/wgnet/aioamqp-ext
+
 +++
 
 ### Producer
@@ -331,6 +333,29 @@ class BooksListView(BaseListView):
 
 +++
 
+### Install
+
+```
+pip install aiohttp_prometheus_monitoring[amqp,redis,postgres]
+```
+
++++
+
+### Setup
+
+```python
+from aiohttp import web
+from aiohttp_prometheus_monitoring import setup_monitoring
+
+def create_app(loop=None):    
+    app = web.Application()
+    loop.run_until_complete(setup_monitoring(settings.MONITORING, app))
+    
+    return app
+```
+
++++
+
 ### Configuring
 
 ```
@@ -395,29 +420,6 @@ MONITORING = {
 @[17-26]
 @[27-39]
 @[40-52]
-
-+++
-
-### Install
-
-```
-pip install aiohttp_prometheus_monitoring[amqp,redis,postgres]
-```
-
-+++
-
-### Setup
-
-```python
-from aiohttp import web
-from aiohttp_prometheus_monitoring import setup_monitoring
-
-def create_app(loop=None):    
-    app = web.Application()
-    loop.run_until_complete(setup_monitoring(settings.MONITORING, app))
-    
-    return app
-```
 
 +++
 
