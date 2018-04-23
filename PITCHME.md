@@ -452,6 +452,8 @@ monitoring_postgres 1.0
 
 Presentation: https://gitpitch.com/dburakov/aiolibs
 
+![qrcode](assets/qrcode.png)
+
 Libs: https://github.com/wgnet?q=aio
 
 Links:
